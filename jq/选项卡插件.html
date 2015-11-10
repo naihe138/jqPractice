@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#box div,#box1 div { width: 300px; height: 300px; border: 1px solid red; display: none;}
+			.active{ background: red;}
+		</style>
+		<script src="jq.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			(function($){
+					function fnTab(options){
+						
+						var defaults = {
+							value: ["11", "22", "33", "44"],
+							content : ["aaaa","bbbb", "cccc","ddddd"],
+							event :　"click"
+						}
+						var settings = {};
+						var $parent = this;
+						
+						settings = $.extend( settings , defaults , options);
+						creat();
+						bing();
+						
+						console.log($parent)
+						function creat(){
+							$.each(settings.value, function(i, val) {
+								var $input = $('<input type="button" value="'+val+'" />');
+								$parent.append($input);
+								if(i==0){
+									$input.addClass("active")
+								}
+							});
+							$.each(settings.content, function(i, content) {
+								var $div = $('<div>'+content+'</div>');
+								$parent.append($div);
+								if(i==0){
+									$div.show();
+								}
+							});
+						}
+						
+						function bing(){
+							var $input = $parent.find("input");
+							var $div = $parent.find("div");
+							$input.on(settings.event, function(){
+								
+								$parent.trigger("beforeChange");
+								//$parent.trigger('beforeChange');
+								
+								$(this).attr("class", "active").siblings("input").attr("class", "");
+								$div.eq($(this).index()).show().siblings("div").hide();
+								
+								$parent.trigger("afterChange");
+							})
+						}
+					}
+			
+				$.fn.extend({
+					tab : fnTab
+				});
+			})(jQuery)
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				$("#box").tab({});
+				//trigger()
+				$('#box').on('beforeChange',function(){
+					alert(21)
+				});
+				$('#box').on('afterChange',function(){
+					alert(12)
+				});
+				
+				$("#box1").tab({
+					value: ["体育", "财经", "新闻", "尼玛", "逗比"],
+					content : ["aa体育aa","bb财经bb", "c新闻ccc","ddd尼玛dd","ee逗比eeee"],
+					event :　"mouseover"
+				});
+			})
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<!--<input class="active" type="button" value="111" />
+			<input type="button" value="222" />
+			<input type="button" value="333" />
+			<input type="button" value="444" />
+			<div style="display: block;">1111111</div>
+			<div>2222222</div>
+			<div>3333333</div>
+			<div>4444444</div>-->
+			
+		</div>
+		<div id="box1">
+			
+		</div>
+	</body>
+</html>

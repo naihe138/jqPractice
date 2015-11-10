@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="jq.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jsview.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="result"></div>
+		<script type="text/x-jsrender" id="theTmpl">
+			{{:name}}<br />
+			{{props adress}}
+				 <b>{{>key}}:</b> {{>prop}}<br/>
+			{{/props}}
+		</script>
+		<script type="text/javascript">
+			var data = [
+				{
+					"name": "何文林",
+					"adress": {
+						"city" : "南宁"
+					}
+				},
+				{
+					"name": "何文林",
+					"adress": {
+						"city" : "南宁"
+					}
+				},
+				{
+					"name": "何文林",
+					"adress": {
+						"city" : "南宁"
+					}
+				},
+				{
+					"name": "何文林",
+					"adress": {
+						"city" : "南宁"
+					}
+				},
+				{
+					"name": "何文林",
+					"adress": {
+						"city" : "南宁"
+					}
+				},
+				{
+					"name": "何文林",
+					"adress": {
+						"city" : "南宁"
+					}
+				}
+				
+			
+			];
+			var template = $.templates("#theTmpl");
+			var html = template.render(data);
+			$("#result").html(html);
+				
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0px;
+				padding: 0px;
+			}
+			html,body{
+				width: 100%;
+				height: 100%;
+			}
+			body{
+				display: -webkit-box;
+				-webkit-box-align: center;
+				position: relative;
+				overflow: hidden;
+			}
+			#wrap{
+				width: 600px;
+				height: 50px;
+				margin: 100px auto;
+				
+			}
+			#wrap a{
+				display: block;
+				width: 50px;
+				height: 50px;
+				background: orange;
+				float: left;
+				margin-left: 15px;
+				border-radius: 50%;
+				position: relative;
+			}
+			#wrap a i{
+				display: block;
+				height: 30px;
+				padding: 0 10px;
+				background: gray;
+				border-radius: 5px;
+				font: normal 14px/30px "微软雅黑";
+				text-align: center;
+				position: absolute;
+				left: -2px;
+				top: -33px;
+				display: none;
+				color: #fff;
+			}
+			#wrap .active{
+				background: red;
+			}
+			.text{
+				background: firebrick;
+				width: 300px;
+				line-height: 30px;
+				position: absolute;
+				left: 50%;
+				margin-left: -150px;
+				top: 100px;
+				color: #fff;
+				text-align: center;
+			}
+		</style>
+		<script type="text/javascript" src="jq.js" ></script>
+		<script type="text/javascript">
+			$(function(){
+				var num = 0;
+				var timer = null;
+				$("#wrap").find("a").eq(num).attr("class", "active").prevAll().attr("class", "active");
+				$("#wrap").find("a").mouseover(function(){
+					tab($(this));
+					clearInterval(timer);
+					return false;
+				})
+				$("#wrap").find("a").mouseout(function(){
+					c();
+					return false;
+				})
+				$("#wrap").mouseover(function(){
+					clearInterval(timer);
+				})
+				$("#wrap").mouseout(function(){
+					c();
+				})
+				$("#wrap").find("a").click(function(){
+					num=$(this).index();
+					tab($(this));
+					var str = $("#wrap").find("i").eq(num).html();
+					$(".text").html(str);
+				})
+				function tab(obj){
+					obj.attr("class", "active").prevAll().attr("class", "active");
+					obj.nextAll().attr("class", "");
+					$("#wrap").find("i").each(function( i, elem){
+						$(elem).css("display", "none");
+					});
+					obj.find("i").css("display", "block");
+				}
+				function c(){
+					clearInterval(timer);
+					timer = setTimeout(function(){
+						var $a = $("#wrap").find("a").eq(num);
+						tab($a);
+					},200)
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<div id="wrap">
+			<a href="#"><i>11111</i></a>
+			<a href="#"><i>22222</i></a>
+			<a href="#"><i>33333</i></a>
+			<a href="#"><i>44444</i></a>
+			<a href="#"><i>55555</i></a>
+			<a href="#"><i>66666</i></a>
+			<a href="#"><i>77777</i></a>
+			<a href="#"><i>88888</i></a>
+		</div>
+		<div class="text"></div>
+	</body>
+</html>

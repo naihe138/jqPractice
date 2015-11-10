@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{ margin: 0; padding: 0;}
+			#box{ width: 300px; height: 300px; position: absolute; left: 0; top: 0; /*border: 1px solid red;*/}
+			.header{ background: green; color: #FFFFFF; width: 100%; text-align: center; position: relative; height: 40px;}
+			#close{ width: 30px; height: 30px; border: 1px solid #00008B; position: absolute; right: 0; top: 0px; cursor: pointer;}
+			.main{ height: 210px; width: 100%; background: #ccc; text-align: center; line-height: 200px; font: bold 20px/200px "微软雅黑";}
+			.bottom{ width: 100%; height: 50px; background: firebrick; color: #FFFFFF; cursor: pointer;}
+		</style>
+		<script src="jq.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			(function($){
+				function fnDialog(opation){
+					var defaults = {
+						btn : "",
+						drag : false,
+						title : "这是一个弹窗插件",
+						content : "里面是弹窗的内容",
+						foot : "底部可不可以拖拽呢？", 
+						left:100, 
+						top:100
+					}
+					var settings = {};
+					var parent = this;
+					settings = $.extend( settings, defaults, opation);
+					
+					bing();
+					
+					
+					function creat(){
+						parent.hide();
+						parent.css({
+							border : "1px solid black",
+							left :　settings.left,
+							top : settings.top
+						});
+						var $hearder = $('<div class="header"><h1>'+settings.title+'</h1><span id="close">X</span></div>');
+						var $main = $('<div class="main">'+settings.content+'</div>');
+						var $foot = $('<div class="bottom">'+settings.foot+'</div>');
+						parent.append($hearder);
+						parent.append($main);
+						parent.append($foot);
+						
+					}
+					
+					function bing(){
+						console.log($(settings.btn));
+						
+						$(settings.btn).on("click", function(){
+							alert(123)
+						});
+						
+//						$(settings.handler).on('click',function(){
+//							$parent.show();
+//						});
+//						
+						
+						
+						
+						
+						parent.delegate("#close", "click", function(ev){
+							
+							parent.hide();
+						
+							ev.stopPropagation();
+							return false;
+						})
+						
+					}
+					
+				}
+				
+				
+				$.fn.extend({
+					dialog: fnDialog
+				})
+			})(jQuery)
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				
+				$("#box").dialog({
+						btn : "#btn1",
+						drag : false,
+						title : "这是一个弹窗插件",
+						content : "里面是弹窗的内容",
+						foot : "底部可不可以拖拽呢？", 
+						left:100, 
+						top:100
+				});
+				
+			})
+		</script>
+	</head>
+	<body>
+		<input type="button" name="btn1" id="btn1" value="点击弹窗" />
+		<div id="box">
+				<!--<div class="header">
+					<h1>标题</h1>
+					<span id="close">X</span>
+				</div>
+				<div class="main">
+					主体内容
+				</div>
+				<div class="bottom">
+					可拖拽区域
+				</div>-->
+			
+		</div>
+	</body>
+</html>

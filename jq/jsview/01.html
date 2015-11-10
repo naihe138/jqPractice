@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="jq.js"></script>
+		<script src="jsview.js"></script>
+	</head>
+	<body>
+		<div id="result">
+			
+		</div>
+	</body>
+	<script type="text/x-jsrender" id="temTmpl">
+		
+		   <em>Name:</em> {{:name}}
+		   {{if showNickname && nickname}}
+		      (Goes by <em>{{:nickname}}</em>)
+		   {{/if}}
+		
+	</script>
+	<script type="text/javascript">
+		var data = [
+			{
+				"name": "Robert",
+			    "nickname": "Bob",
+			    "showNickname": true
+			},
+			{
+			    "name": "Susan",
+			    "nickname": "Sue",
+			    "showNickname": false
+			}
+		];
+		
+		var temTmpl = $.templates("#temTmpl");
+		var htmlOutput = temTmpl.render(data);
+		$("#result").html(htmlOutput);
+		
+		
+	</script>
+</html>

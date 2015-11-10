@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+			#box1{
+				
+			}
+			ul{
+				list-style: none;
+			}
+			li{
+				font: 100px/500px "微软雅黑";
+				color: #FFFFFF;
+				text-align: center;
+			}
+			#list li:nth-of-type(1){
+				background: firebrick;
+			}
+			#list li:nth-of-type(2){
+				background: forestgreen;
+			}
+			#list li:nth-of-type(3){
+				background: darkblue;
+			}
+			#list li:nth-of-type(4){
+				background: brown;
+			}
+			#list li:nth-of-type(5){
+				background: chocolate;
+			}
+			#list li:nth-of-type(6){
+				background: teal;
+			}
+			#btn{
+				padding: 10px;
+				position: fixed;
+				z-index: 10;
+				top: 30%;
+				right: 0;
+			}
+			#btn a{
+				display: block;
+				height: 20px;
+				width: 20px;
+				border: solid 2px #FFFFFF;
+				border-radius: 50%;
+				margin-bottom: 10px;
+				
+			}
+			#btn .active{
+				background: #FFFFFF;
+				cursor: not-allowed;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box1">
+			<ul id="list">
+				<li>11111111111</li>
+				<li>22222222222</li>
+				<li>33333333333</li>
+				<li>44444444444</li>
+				<li>55555555555</li>
+				<li>66666666666</li>
+			</ul>
+			<div id="btn">
+				<a class="active" href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+			</div>
+		</div>
+		<script type="text/javascript" src="jq.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var $viewWidth = $(window).width(),
+					$viewHeight = $(window).height();
+				$("#box1").find("li").css({"width": $viewWidth +"px", "height": $viewHeight +"px"});
+				$(window).scrollTop(0);  //  老师求助~~~~ 谷歌浏览器刷新之后滚动条没有跳到顶部？？
+				
+				$(window).scroll(function(){
+					var i = Math.ceil(parseFloat($(document).scrollTop()/$("#list").find("li").eq(0).height()));
+					$("#btn").find("a").removeClass("active").eq(i).addClass("active");
+					
+					
+				})
+				//alert($("#box1").find("li").eq(1).offset().top);
+				$("#btn").find("a").on("click", function(){
+					var _index = $(this).index();
+					//$(window).scrollTop(parseInt(_index*$viewHeight));
+					var _top = parseInt(_index*$viewHeight)
+					$("html,body").animate({"scrollTop": _top},500);  
+				})
+				
+			})
+
+			
+		</script>
+	</body>
+</html>

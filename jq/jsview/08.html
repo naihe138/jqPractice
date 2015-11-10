@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="jq.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jsview.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="result">
+			
+		</div>	
+		
+		<script id="theTmpl" type="text/x-jsrender">
+		<b>{{:title}}</b>
+		<ul>
+		  {{for members}}
+		      <li>{{:name}} lives in <b>{{:address.city}}</b></li>
+		  {{/for}}
+		</ul>
+	
+		</script>
+		<script type="text/javascript">
+			var data = {
+			  "title": "The A team",
+			  "members": [
+			    {
+			      "name": "Pete",
+			      "address": {
+			        "city": "Seattle"
+			      }
+			    },
+			    {
+			      "name": "Heidi",
+			      "address": {
+			        "city": "Sidney"
+			      }
+			    }
+			  ]
+			};
+			
+			var template = $.templates("#theTmpl");
+			
+			var htmlOutput = template.render(data);
+			
+			$("#result").html(htmlOutput);
+		</script>
+	</body>
+</html>

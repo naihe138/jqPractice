@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="jq.js"></script>
+		<script src="jsview.js"></script>
+	</head>
+	<body>
+		<div id="result"></div>
+	</body>
+	<script type="text/x-jsrender" id="theTmpl">
+		<p>name:{{:name }}</p>
+		<p>age:{{:age }}</p>
+	</script>
+	<script type="text/javascript">
+		var data = [
+			{
+				"name" : "何文林",
+				"age" : 24
+			},
+			{
+				"name" : "天知道",
+				"age" : 2
+			},
+			{
+				"name" : "天知道",
+				"age" : 2
+			}
+			
+		];
+		var templat = $.templates("#theTmpl"); //会自动循环
+		var html = templat.render(data);
+		$("#result").html(html);
+	</script>
+</html>

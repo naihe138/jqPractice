@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			html, body{
+				width: 100%;
+				height: 100%;
+			}
+			body{
+				margin: 0;
+				display: flex;
+				justify-content: center;
+  				align-items: center;
+			}
+			input{
+				margin: 0;
+				padding: 0;
+				background: none;
+				border: none;
+				font-family: "微软雅黑";
+				outline: none;
+				
+			}
+			.box{
+				width: 500px;
+				min-height: 260px;
+				padding: 20px;
+				background: rgba(0,0,0,0.1);
+				transform-style: preserve-3d;
+				perspective: 800px;
+				-webkit-perspective: 800px;
+				-moz-perspective: 800px;
+			}
+			.set{
+				position: relative;
+				margin-bottom: 24px;
+			}
+			.set:after{
+				content: "";
+				display: block;
+				clear: both;
+			}
+			.set label{
+				float: left;
+				display: block;
+				width: 60px;
+				height: 40px;
+				line-height: 40px;
+				transform-style: preserve-3d;
+				-moz-transform-style: preserve-3d;
+				-webkit-transform-style: preserve-3d;
+			}
+			.write{
+				width: 300px;
+				border: 1px solid #000;
+				float: left;
+				min-height: 28px;
+				margin: 0 10px;
+				padding: 5px;
+				border-radius: 5px;
+				cursor: no-drop;
+				line-height: 35px;
+			}
+			.write span{
+				padding: 0 15px;
+				position: relative;
+				float: left;
+				
+			}
+			.write span em{
+				width: 13px;
+				height: 13px;
+				position: absolute;
+				right: 0;
+				top: 0;
+				background: url(delete.png) no-repeat;
+				cursor: pointer;
+			}
+			.btn{
+				width: 50px;
+				height: 40px;
+				background: hotpink;
+				color: #FFFFFF;
+				cursor: pointer;
+				font-size: 20px;
+			}
+			.btn:hover{
+				background: darkcyan;
+			}
+			.popup{
+				position: absolute;
+				width: 200px;
+				background: chocolate;
+				left: 430px;
+				top: 40PX;
+				max-height: 200px;
+				overflow-y: auto;
+				overflow-x: hidden;
+				border: 1px solid #008B8B;
+				z-index: 1;
+				display: none;
+				transform-origin: left;
+				transform: rotateY(-90deg);
+				-webkit-transform-origin: left;
+				-webkit-transform: rotateY(-90deg);
+				-moz-transform-origin: left;
+				-moz-transform: rotateY(-90deg);
+				transition: .5s;
+			}
+			.popup ul{
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.popup li{
+				width: 100%;
+				line-height: 35px;
+				padding-left: 5px;
+				box-sizing: border-box;
+				cursor: pointer;
+				color: #FFFFFF;
+				margin-bottom: 3px;
+			}
+			.popup li:hover{
+				background: blueviolet;
+			}
+			.popup li span{
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+			.popup li.checked{
+				background: blueviolet;
+			}
+			/*.popup li:hover span{
+				transform: translate(20px, 0);
+			}*/
+			
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div id="custom_100" class="set">
+				<label>地点：</label>
+				<div class="write" id="write_100">
+					<!--
+                   <span>
+						123
+						<em></em>
+						
+					</span>
+					<span>
+						123
+						<em></em>
+						
+					</span>
+					<span>
+						123
+						<em></em>
+						
+					</span>
+					<span>
+						123
+						<em></em>
+						
+					</span>
+					<span>
+						123
+						<em></em>
+						
+					</span>
+					<span>
+						123
+						<em></em>
+						
+					</span>
+					  -->
+				</div>
+				<input type="button" class="btn" name="" id="add_100" value="+" />
+				<input type="button" class="btn" name="" id="remove_100" value="-" />
+				<div id="content_100" class="popup">
+					<!--<ul>
+						<li><span>222</span></li>
+						<li><span>222</span></li>
+						<li><span>222</span></li>
+						<li><span>222</span></li>
+						<li><span>222</span></li>
+						<li><span>222</span></li>
+						<li><span>222</span></li>
+						<li><span>222</span></li>
+						<li><span>222</span></li>
+						<li><span>222</span></li>
+						<li><span>222</span></li>
+						<li><span>222</span></li>
+						
+					</ul>-->
+				</div>
+			</div>
+			
+			<div id="custom_200" class="set">
+				<label>时间：</label>
+				<div class="write" id="write_200">
+			
+					
+				</div>
+				<input type="button" class="btn" name="" id="add_200" value="+" />
+				<input type="button" class="btn" name="" id="remove_200" value="-" />
+				<div id="content_200" class="popup">
+	
+				</div>
+			</div>
+			
+			<div id="custom_300" class="set">
+				<label>领导：</label>
+				<div class="write" id="write_300">
+			
+				</div>
+				<input type="button" class="btn" name="" id="add_300" value="+" />
+				<input type="button" class="btn" name="" id="remove_300" value="-" />
+				<div id="content_300" class="popup">
+				
+				</div>
+			</div>
+			
+			<div id="custom_400" class="set">
+				<label>部门:</label>
+				<div class="write" id="write_400">
+					
+				</div>
+				<input type="button" class="btn" name="" id="add_400" value="+" />
+				<input type="button" class="btn" name="" id="remove_400" value="-" />
+				<div id="content_400" class="popup">
+					
+				</div>
+			</div>
+			
+		</div>
+		<script src="jq.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				function popup( id, type, data){
+					var content = $("#content_" + id);
+					var write = $("#write_"+id);
+					var allRemove = $("#remove_"+id);
+					init();
+					//初始化函数
+					function init(){
+						bingAdd();
+						$(document).on("click", function(){
+							hidePopup();
+						});
+						//阻止document的默认以及冒泡事件
+						$(".box").on("click", function(ev){
+							ev.stopPropagation();
+							return false;
+						});
+						toDelet();
+						toAllRemove()
+						drag();
+					}
+					//显示弹层+
+					function  showPopup(){
+						content.show(0);
+						if(type==2){
+							allBtn();
+						}
+						creatDate();
+						setCSS( content, "transform", "rotateY(0)" );
+						
+						
+					}
+					//隐藏弹窗
+					function hidePopup(){
+						$(".popup").hide(0);
+						setCSS( content, "transform", "rotateY(-90deg)" );
+					}
+					//创建数据
+					function creatDate(){
+						if(!content.find("ul").length){
+							var $ul = $("<ul>");
+							$.each(data, function( i , val) {
+								var $li = $('<li><span>'+val.name+'</span></li>');
+								$ul.append($li);
+							});
+							content.append($ul);
+							checkRadio();
+							checkBox();
+						}
+					}
+					//点击显示弹窗
+					function bingAdd(){
+						$("#add_"+id).on("click", function(){
+							hidePopup();
+							showPopup();
+						})
+					}
+					//差异性 创建全选按钮
+					
+					function allBtn(){
+						var a = content.find("a"); 
+						if(!a.length){
+							var $a = $("<a href='javascript:;'>全选</a>");
+							$a.css({
+								"display" : "block",
+								"padding" : "10px 5px",
+								"text-decoration" : "none"
+							})
+							content.prepend($a);
+							$a.on("click", function(){
+								content.find("span").each(function(i , elem){
+									if($(elem).parent().attr("class") != "checked"){
+										//$(elem).attr("class", "checked" );
+										$(elem).trigger("click");
+									}
+								})
+								
+							});
+						}
+						
+					}
+					
+					//单选按钮
+					function checkRadio(){
+						if(type == 1){
+							content.delegate("span", "click", function(){
+								var $li = $(this).parent("li");
+								if($li.attr("class") != "checked"){
+									var _html = $(this).html();
+									var index = $(this).parent("li").index();
+									$li.attr("class", "checked").siblings("li").attr("class", "");
+									checkOdd.add( _html,  index );
+								}
+								else{
+									$li.attr("class", "");
+									checkOdd.remove();
+								}
+							})
+						}
+					}
+					
+					//多选按钮
+					function checkBox(){
+						if(type == 2){
+							content.delegate("span", "click", function(){
+								var $li = $(this).parent("li");
+								var _html = $(this).html();
+								var index = $(this).parent("li").index();
+								if($li.attr("class") != "checked"){
+									$li.attr("class", "checked");
+									checkEven.add( _html,  index );
+								}
+								else{
+									$li.attr("class", "");
+									checkEven.remove(index);
+								}
+							})
+						}
+					}
+					
+					//单选的样式与去除
+					var checkOdd = (function(){
+						function add(val, _index){
+							var $span = $('<span curIndex='+_index+'>'+val+'<em></em></span>');
+							write.html($span);
+							
+						};
+						function remove(){
+							write.empty();
+						};
+						
+						return {
+							add : add,
+							remove : remove
+						}
+					})();
+					
+					//多选的样式与去除
+					var checkEven = (function(){
+						function add(val, _index){
+							var $span = $('<span curIndex='+_index+'>'+val+'<em></em></span>');
+							write.append($span);
+							
+						};
+						function remove(_index){
+							var $span = write.find("span");
+							$span.each(function(i, elem){
+								if($(elem).attr("curIndex")==_index){
+									$(elem).remove();
+								};
+							})
+						};
+						return {
+							add : add,
+							remove : remove
+						}
+					})();
+					
+					//输入框中的删除按钮
+					function toDelet(){
+						var $em = write.find("em");
+						write.delegate( "em", "click", function(){
+							var thisIndex = $(this).parent().attr("curindex");
+							content.find("span").each( function( i, elem ){
+								if($(elem).parent().index() == thisIndex ){
+									$(elem).parent().attr("class", "");
+								}
+							} );
+							$(this).parent().remove();
+						} )
+					}
+					
+					//全部删除按钮-
+					function toAllRemove(){
+						allRemove.on("click", function(){
+							write.find("em").trigger("click");
+						})
+						
+					};
+					//拖拽排序
+					function drag(){
+						
+						write.delegate("span", "mousemove", function(){
+							//移上去鼠标光标的变化
+							if($(this).siblings().length != 0){
+								$(this).css("cursor", "move");
+							}else{
+								$(this).css("cursor", "default");
+							}
+						});
+						
+						write.delegate("span", "mousedown.drag", function(ev){
+							var This = $(this);
+							if($(this).siblings().length != 0){
+								var NewSpan = $(this).clone();
+								NewSpan.css({
+									position : "absolute", 
+									left : ev.pageX + 10,
+									top : ev.pageY + 10
+								})
+								$("body").append(NewSpan);
+								$(this).css("opacity", "0.5");
+								iCursor.add( This );
+								
+								$(document).on("mousemove.drag", function(ev){
+									
+									NewSpan.css({
+										position : "absolute", 
+										left : ev.pageX + 10,
+										top : ev.pageY + 10
+									})
+									var clostSpan = findCloseSpan( { x : ev.pageX, y : ev.pageY } );
+									iCursor.move( clostSpan, ev.pageX );
+								});
+								$(document).on("mouseup.drag", function(ev){
+									NewSpan.remove();
+									This.css("opacity", "1");
+									$(document).off(".drag");
+									
+									var clostSpan = findCloseSpan( { x : ev.pageX, y : ev.pageY } );
+									var clostLeft = Math.abs(clostSpan.offset().left + clostSpan.outerWidth()/2);
+									if( ev.pageX < clostSpan.outerWidth()/2){
+										clostSpan.before(This);
+									}else{
+										clostSpan.after(This);
+									}
+									iCursor.remove();
+									
+								});
+							}
+							return false;
+						});
+						
+						function findCloseSpan( xy ){
+							var aSpan = clostRow( xy.y );
+							var clostSpan = clostCol( aSpan, xy.x );
+							return clostSpan;
+							
+						}
+						function clostRow( y ){
+							var arr = [];
+							var value = 999999;
+							var minTop = 0;
+							var $span = write.find("span")
+							$span.each( function( i, elem ){
+								var num = Math.abs($(elem).offset().top + $(elem).outerHeight()/2 - y);
+								if( num < value){
+									value = num;
+									minTop = $(elem).offset().top;
+								}
+							} );
+							$span.each( function( i, elem ){
+								if( minTop == $(elem).offset().top ){
+									arr.push($(elem));
+								}
+							} );
+							return arr;
+							
+						}
+						function clostCol( arr, x ){
+							
+							var value = 99999;
+							var clostSpan = null;
+							$.each( arr, function( i, elem){
+								var clostLeft = Math.abs(elem.offset().left + elem.outerWidth()/2 - x);
+								if( clostLeft < value){
+									value = clostLeft;
+									clostSpan = elem;
+								}
+							} );
+							return clostSpan;
+							
+						}
+						var iCursor = ( function(){
+							var $span = null;
+							function add( startObj ){
+								$span = $("<span>|</span>");
+								$span.css({
+									position :　"absolute", 
+									left : startObj.offset().left,
+									top : startObj.offset().top + 8
+								});
+								$("body").append($span);
+							}
+							function remove(  ){
+								$span.remove();
+							}
+							function move( clostObj, x ){
+								var clostLeft = Math.abs(clostObj.offset().left + clostObj.outerWidth()/2);
+								
+								if( x < clostObj.outerWidth()/2){
+									$span.css({
+										position :　"absolute", 
+										left : clostObj.offset().left,
+										top : clostObj.offset().top + 8
+									});
+								}else{
+									$span.css({
+										position :　"absolute", 
+										left : clostObj.offset().left + clostObj.outerWidth(),
+										top : clostObj.offset().top + 8
+									});
+								}
+							}
+							return {
+								add : add,
+								remove : remove,
+								move : move
+							}
+						} )();
+						
+					}
+					
+					//设置兼容css3的样式
+					function setCSS(obj, attr, val){
+						obj.css(attr, val);
+						obj.css( "-webkit-"+attr, val);
+						obj.css( "-moz-"+attr, val);
+					}
+					
+				}
+				
+				
+				
+				
+				
+				popup('100',1,[
+					{name : '办公室'},
+					{name : '会议室'},
+					{name : '室外'},
+					{name : '咖啡厅'}
+				]);
+				
+				popup('200',1,[
+					{name : '8:00~10:00'},
+					{name : '12:00~13:00'},
+					{name : '14:00~16:00'},
+					{name : '20:00~23:00'},
+					{name : '23:00~00:00'}
+				]);
+				
+				popup('300',2,[
+					{name : '李彦宏1'},
+					{name : '马云1'},
+					{name : '马化腾1'},
+					{name : '李彦宏2'},
+					{name : '马云2'},
+					{name : '马化腾2'},
+					{name : '李彦宏3'},
+					{name : '马云3'},
+					{name : '马化腾3'},
+					{name : '李彦宏4'},
+					{name : '马云4'},
+					{name : '马化腾4'},
+					{name : '李彦宏5'},
+					{name : '马云5'},
+					{name : '马化腾5'},
+					{name : '李彦宏6'},
+					{name : '马云6'},
+					{name : '马化腾6'},
+					{name : '李彦宏7'},
+					{name : '马云7'},
+					{name : '马化腾7'}
+				]);
+				
+				popup('400',2,[
+					{name : '采购部'},
+					{name : '销售部'},
+					{name : '策划部'},
+					{name : '运维中心'},
+					{name : 'IT部'},
+					{name : '人力资源'},
+					{name : '行政部门'},
+					{name : '公关部'},
+					{name : '法务部门'},
+					{name : '市场部'},
+					{name : '运营部'},
+					{name : '游戏部门'},
+					{name : '社区部门'},
+					{name : '电商部门'},
+					{name : '客服部'}
+				]);
+
+				
+			})
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="jq.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jsview.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="result"></div>
+		<script type="text/x-jsrender" id="peopleTemplate">
+			{{:name}}就住在{{:address.city}}
+		</script>
+		<script>
+			var data = [
+				{
+					"name" : "何文林",
+					"address" : {
+						"city" :　"南宁"
+					}
+				},
+				{
+					"name" : "何文林",
+					"address" : {
+						"city" :　"南宁"
+					}
+				},
+				{
+					"name" : "何文林",
+					"address" : {
+						"city" :　"南宁"
+					}
+				},
+				{
+					"name" : "何文林",
+					"address" : {
+						"city" :　"南宁"
+					}
+				}
+			];
+			//var tempo
+			var html = $("#peopleTemplate").render(data);
+			$("#result").html(html);
+		</script>
+	</body>
+</html>

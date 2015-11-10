@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="jq.js" ></script>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#btn{
+				margin: 50px;
+			}
+			#main{
+				position: absolute;
+				width: 300px;
+				height: 200px;
+				border: 1px solid #00008B;
+				text-align: center;
+				display: none;
+			}
+			#main input{
+				margin-top: 30px;
+			}
+			#main span{
+				display: block;
+				width: 20px;
+				height: 20px;
+				text-align: center;
+				line-height: 20px;
+				background: red;
+				position: absolute;
+				right: 0;
+				top: 0;
+				cursor: pointer;
+				
+			}
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				var $main = $('<div id="main"><label>账号:</label><input type="text" /><br /><label>密码:</label><input type="text" /><br /><input type="button" value="登陆"/><br /><span>X</span></div');
+				var viewH = $(window).height();
+				var viewW = $(window).width();
+				$("body").append($main);
+				var posX = (viewW-$("#main").width())/2;
+				var posY = (viewH-$("#main").height())/2;
+				$("#main").css({"left": posX+"px", "top": posY+"px"});
+				$("#btn").on("click", function(){
+					$("#main").show(0);
+				})
+				$("#main").find("span").on("click", function(){
+					$("#main").hide(0);
+				})
+				
+				var timer = null;
+				$(window).scroll(function(){
+					clearInterval(timer);
+					timer = setTimeout(function(){
+						var _top = posY+$(window).scrollTop();
+						$("#main").animate({top: _top}, 200);
+					},200)
+					
+				});
+				
+				
+			})
+		</script>
+	</head>
+	<body style="height: 3000px;">
+		<input type="button" name="btn" id="btn" value="登陆" />
+		<!--<div id="main">
+			<label>账号:</label><input type="text" /><br />
+			<label>密码:</label><input type="text" /><br />
+			<input type="button" value="登陆"/><br />
+			<span>X</span>
+		</div>-->
+	</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			
+			#wrap{
+				width: 800px;
+				height: 400px;
+				margin: 100px auto;
+				border: dashed 1px #808080;
+				padding: 10px;
+			}
+			#box1,#box2{
+				border: 1px solid #808080;
+				padding: 5px;
+				
+			}
+			#box1{
+				float: left;
+			}
+			#box2{
+				float: right;
+			}
+			#btn{
+				
+				
+				margin-top: 20px;
+				text-align: center;
+			}
+			li{
+				cursor: pointer;
+			}
+			.clear{
+				zoom: 1;
+			}
+			.clear:after{
+				content: "";
+				display: block;
+				clear: both;
+			}
+			.active{
+				background: orange;
+				color: #fff;
+			}
+		</style>
+		<script type="text/javascript" src="jq.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				tab($("#box1"), 1, $("#box2"))
+				
+				tab($("#box2"), 0, $("#box1"))
+				
+				
+				
+				function tab(obj1, _index, obj2){
+					
+					obj1.find("li").click(function(){
+						$(this).toggleClass("active")
+					})
+					
+					
+					$("input").eq(_index).click(function(){
+						var toMove = obj1.find("li[class=active]");
+						obj1.find("li[class=active]").remove();
+						toMove.appendTo(obj2.find("ul"));
+						obj2.find("li").removeClass("active");
+						alert(obj2.find("li").length)
+					});
+				}
+				
+				
+				
+			})
+		</script>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="clear">
+			<div id="box1">
+				<ul>
+					<li><a href="#"></a>赵克志另有任用</li>
+					<li><a href="#"></a>陈敏尔出任贵州省委书记</li>
+					<li><a href="#"></a>向今麦郎索赔450万被刑拘</li>
+					<li><a href="#"></a>往事|幼时1家9口衣服轮流穿</li>
+					<li><a href="#"></a>亲属|妹妹抱着孩子跳井身亡</li>
+					<li><a href="#"></a>敛财|夫人何秀莲操控军官升职</li>
+				</ul>
+			</div>
+			<div id="box2">
+				<ul>
+					<li><a href="#"></a>GIF-马刺女助教秀霹雳舞</li>
+					<li><a href="#"></a>万科与首创成立物业公司</li>
+					<li><a href="#"></a>观致3召回踩地雷</li>
+					<li><a href="#"></a>易热点：“国家队”救A股将会持续多久</li>
+					<li><a href="#"></a>飞度降0.4万</li>
+					<li><a href="#"></a>Win10浏览器能不能秒Chrome?</li>
+				</ul>
+			</div>
+			</div>
+			<div id="btn">
+				<input type="button" value="左移" />
+				<input type="button" value="右移" />
+				<input type="button" value="交换" />
+			</div>
+		</div>
+	</body>
+</html>
